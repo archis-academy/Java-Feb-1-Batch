@@ -19,4 +19,25 @@ public class LibraryManagementSystemApplication {
 
         System.out.println("Kitabı Başarıyla Eklediniz!");
     }
+    static void deleteBook(String ISBN){
+        boolean found = false;
+
+        for (int i=0;i<quantity;i++){
+            if (books[i][2].equals(ISBN)){
+                
+                books[i][0] = null;
+                books[i][1] = null;
+                books[i][2] = null;
+                books[i][3] = null;
+
+                quantity--;
+                found=true;
+                System.out.println("Kitap başarıyla silindi!");
+                break;
+            }
+        }
+        if (!found){
+            System.out.println("Kitap bulunamadı!");
+        }
+    }
 }
