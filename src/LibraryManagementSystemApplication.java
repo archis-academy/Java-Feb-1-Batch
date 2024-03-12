@@ -19,4 +19,28 @@ public class LibraryManagementSystemApplication {
 
         System.out.println("Kitabı Başarıyla Eklediniz!");
     }
+    static void truncateBooksArrayOnDeletion(String ISBN) {
+        int foundIndex = -1;
+        for (int i = 0; i < quantity; i++) {
+            if (books[i][2].equals(ISBN)) {
+                foundIndex = i;
+                break;
+            }
+        }
+        if (foundIndex == -1) {
+            System.out.println("Kitap Bulunamadı!");
+            return;
+        }
+        String[][] newBooks = new String[quantity - 1][4];
+        for (int i = 0; i < foundIndex; i++) {
+            newBooks[i] = books[i];
+        }
+        for (int i = foundIndex + 1; i < quantity; i++) {
+            newBooks[i - 1] = books[i];
+        }
+        books = newBooks;
+        quantity--;
+
+        System.out.println("Kitap başarıyla silindi ve dizi güncellendi.");
+    }
 }
