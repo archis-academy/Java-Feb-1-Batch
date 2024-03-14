@@ -1,4 +1,5 @@
 import java.awt.print.Book;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class LibraryManagementSystemApplication {
@@ -24,6 +25,19 @@ public class LibraryManagementSystemApplication {
         System.out.println("Kitabı Başarıyla Eklediniz!");
     }
 
+    static void extendBooksArrayOnAddition(String title){
+        String[] newBooks = new String[books.length + 1];
+
+        for (int i = 0; i < books.length; i++){
+            newBooks[i] = Arrays.toString(books[i]);
+
+        }
+        newBooks[books.length] = title;
+        books = new String[][]{newBooks};
+        System.out.println("Kitap Başarıyla eklendi!");
+
+    }
+
     static void requestBook(String title, String author) {
         int pageNumber = randomPage();
         int ISBN = randomISBN();
@@ -33,8 +47,10 @@ public class LibraryManagementSystemApplication {
         System.out.println("Kitap Sayfa Sayısı:" + pageNumber);
         System.out.println("Kitap ISBN:" + ISBN);
 
-
     }
+
+
 }
+
 
 
