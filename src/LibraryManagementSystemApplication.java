@@ -50,4 +50,24 @@ public class LibraryManagementSystemApplication {
 
         System.out.println("Kitap başarıyla silindi ve dizi güncellendi.");
     }
+
+    static void deleteBook(String ISBN){
+        if (quantity == 0) {
+            System.out.println("Kütüphanede kitap bulunmamaktadır.");
+        } else {
+            int foundIndex = -1;
+            for (int i = 0; i < quantity; i++) {
+                if (books[i][2].equals(ISBN)) {
+                    foundIndex = i;
+                    break;
+                }
+            }
+            if (foundIndex != -1) {
+                truncateBooksArrayOnDeletion(ISBN);
+            } else {
+                System.out.println("Kitap bulunamadı!");
+            }
+        }
+    }
 }
+
