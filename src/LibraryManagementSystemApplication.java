@@ -37,22 +37,16 @@ public class LibraryManagementSystemApplication {
     }
 
     static void truncateBooksArrayOnDeletion(String ISBN) {
-        int foundIndex = -1;
-        for (int i = 0; i < quantity; i++) {
-            if (books[i][2].equals(ISBN)) {
-                foundIndex = i;
-                break;
-            }
-        }
-        if (foundIndex == -1) {
+        int index = getBookIndexByID(ISBN);
+        if (index == -1) {
             System.out.println("Kitap Bulunamadı!");
             return;
         }
         String[][] newBooks = new String[quantity - 1][4];
-        for (int i = 0; i < foundIndex; i++) {
+        for (int i = 0; i < index; i++) {
             newBooks[i] = books[i];
         }
-        for (int i = foundIndex + 1; i < quantity; i++) {
+        for (int i = index + 1; i < quantity; i++) {
             newBooks[i - 1] = books[i];
         }
         books = newBooks;
@@ -65,17 +59,35 @@ public class LibraryManagementSystemApplication {
         if (quantity == 0) {
             System.out.println("Kütüphanede kitap bulunmamaktadır.");
         } else {
-            int foundIndex = -1;
-            for (int i = 0; i < quantity; i++) {
-                if (books[i][2].equals(ISBN)) {
-                    foundIndex = i;
-                    break;
-                }
-            }
-            if (foundIndex != -1) {
+            int index = getBookIndexByID(ISBN);
+            if (index != -1) {
                 truncateBooksArrayOnDeletion(ISBN);
             } else {
                 System.out.println("Kitap bulunamadı!");
+            }
+        }
+    }
+
+    static void updateBook(String ISBN,String newTitle,String newAuthor,String newPageNumber){
+        int index = getBookIndexByID(ISBN);
+        if (index==-1){
+            System.out.println("Kitap bulunamadı!");
+        }else{
+            books[index][0]=newTitle;
+            books[index][1]=newAuthor;
+            books[index][2]=ISBN;
+            books[index][3]=newPageNumber;
+
+            System.out.println(ISBN+" numaralı kitap güncellendi!");
+        }
+    }
+    static int getBookIndexByID(String ISBN){
+        int foundIndex = -1;
+        for (int i = 0; i < quantity; i++) {
+            if (books[i][2].equals(ISBN)) {
+                foundIndex = i;
+                return foundIndex;
+                break;
             }
         }
     }
