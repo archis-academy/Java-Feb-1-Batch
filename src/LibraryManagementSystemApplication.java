@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class LibraryManagementSystemApplication {
     static int INDEX = 100;
@@ -89,6 +92,36 @@ public class LibraryManagementSystemApplication {
                 return foundIndex;
                 break;
             }
+        }
+    }
+
+    static String checkOutBook(String identityNumber,String bookName, String bookISBN){
+        boolean isFound= false;
+        for(String[] book: books){
+            if(book[3].equals(bookISBN)){
+                isFound=true;
+                truncateBooksArrayOnDeletion(bookISBN);
+
+                LocalDate currentDate = LocalDate.now();
+                DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                String formattedDate = currentDate.format(dateFormatter);
+
+                LocalTime currentTime = LocalTime.now();
+                DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+                String formattedTime = currentTime.format(timeFormatter);
+
+                transactions[quantity][0]= bookISBN;
+                transactions[quantity][1]= identityNumber;
+                transactions[quantity][2]= formattedDate;
+                transactions[quantity][3] = formattedTime;
+                quantity++;
+                break;
+            }
+        }
+        if(isFound == true){
+            return "Kitap ödünç alındı. İyi okumalar!";
+        }else{
+            return "HATA: Kütüphanede kitap bulunamamaktadır!";
         }
     }
 }
