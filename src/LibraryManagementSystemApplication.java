@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class LibraryManagementSystemApplication {
     static int INDEX = 100;
@@ -87,9 +89,31 @@ public class LibraryManagementSystemApplication {
             if (books[i][2].equals(ISBN)) {
                 foundIndex = i;
                 return foundIndex;
-                break;
             }
         }
+        return foundIndex;
+    }
+
+    static boolean checkBookReturnDeadline(String patronName){
+        boolean isLate = false;
+        for (String transaction[]: transactions){
+            if (transaction[1].equalsIgnoreCase(patronName)) {
+                LocalDate dueDate = LocalDate.parse(transaction[2], DateTimeFormatter.ISO_DATE);
+                LocalDate currentDate = LocalDate.now();
+                if (currentDate.isAfter(dueDate)) {
+                    isLate = true;
+                    break;
+                }
+            }
+        }
+
+        if (isLate) {
+            System.out.println("Kitabın iade tarihi geçtiği için kitap yeni kitap alamazsınız!");
+        } else {
+            System.out.println("Yeni kitap alabilirsiniz.");
+        }
+
+        return isLate;
     }
 }
 
