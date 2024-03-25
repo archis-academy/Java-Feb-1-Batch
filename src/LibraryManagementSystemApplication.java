@@ -91,5 +91,13 @@ public class LibraryManagementSystemApplication {
             }
         }
     }
+    static void returnBook(String patronName,String ISBN){
+        if (!checkBookReturnDeadline(patronName)){
+            quantity++;
+            System.out.println("Kitap iade alındı!");
+        }else{
+            System.out.println("Kitabı iade etmeden yeni kitap alamazsınız!");
+        }
+    }
 }
 
