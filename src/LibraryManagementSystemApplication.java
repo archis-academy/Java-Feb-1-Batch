@@ -94,9 +94,9 @@ public class LibraryManagementSystemApplication {
             }
         }
     }
-
     static String checkOutBook(String identityNumber,String bookName, String bookISBN){
         boolean isFound= false;
+        String response="ERROR: The book you are looking for can not be found!";
         for(String[] book: books){
             if(book[3].equals(bookISBN)){
                 isFound=true;
@@ -114,11 +114,9 @@ public class LibraryManagementSystemApplication {
                 break;
             }
         }
-        if(isFound){
-            return "Kitap ödünç alındı. İyi okumalar!";
-        }else{
-            return "HATA: Kütüphanede kitap bulunamamaktadır!";
-        }
+        if(isFound)
+            return "The book has borrowed. Good reading!";
+        return response;
     }
 }
 
