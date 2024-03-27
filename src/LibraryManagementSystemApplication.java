@@ -115,7 +115,7 @@ public class LibraryManagementSystemApplication {
             }
         }
         if(isFound)
-            return "The book has borrowed. Good reading!";
+            response=  "The book has borrowed. Good reading!";
         return response;
     }
 }
